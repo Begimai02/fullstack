@@ -1,4 +1,5 @@
 # fullstack
+
 #USER_ROUTER
 
 ##GET Запросы:
@@ -112,4 +113,12 @@
 
 
 
+
+
+
+npm run dev --> to start server
+
+ctrl c --> to stop server
+
+rs --> to restart
 
