@@ -1,9 +1,10 @@
 const ApiError = require('../error/ApiError');
-const {User, Follower} = require('../models/models');
+const {User, Follower, Post} = require('../models/models');
 const uuid = require('uuid')
 const path = require('path')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 const generateJwt = (id, user_name, role) => {
     return jwt.sign(
@@ -14,6 +15,23 @@ const generateJwt = (id, user_name, role) => {
 }
 
 class UserController {
+
+
+    async get_all(req, res) {
+        console.log('hello world')
+        const users = await User.findAll()
+        
+        return res.json({users: users})
+    }
+
+    async get_follow(req, res) {
+        console.log('hello world')
+        const users = await Follower.findAll()
+        console.log(users)
+        return res.json({users: users})
+    }
+
+
     async registration(req, res, next) {
         const {user_name, password, role} = req.body
         if (!user_name || !password) {
@@ -62,28 +80,40 @@ class UserController {
         return res.json(following)
     }
 
-    async get_followers(req, res, next) {
+    async get_followers(req, res) {
         let followers = await Follower.findAll({where:{following_user: req.user.user_name}})
         let ids = []
-        for (let i=0; i<followers.length; i++) {
-            ids.push(followers[i].dataValues.follower_user)
+        for (let index in followers) {
+            ids.push(followers[index].follower_user)
         }
         const users = await User.findAll({where:{user_name: ids}}) 
         return res.json(users)
-
     }
 
-    async get_following(req, res, next) {
+    async get_following(req, res) {
         let following = await Follower.findAll({where:{follower_user: req.user.user_name}})
         let ids = []
-        for (let i=0; i<followers.length; i++) {
-            ids.push(following[i].dataValues.following_user)
+        for (let index in following) {
+            ids.push(following[index].following_user)
         }
-        
         const users = await User.findAll({where:{user_name: ids}}) 
         return res.json(users)
         
     }
+
+    async search(req, res){
+        const {user_name} = req.query
+        const user = await User.findAll({where:{user_name: {[Op.like]: '%' + user_name + '%'}}})
+        return res.json(user)
+    }
+
+
+    async profile(req, res) {
+        const {user_name} = req.params
+        const user = await User.findOne({where:{user_name: user_name}, include: Post})
+        return res.json(user)
+    }
+
 }
 
 module.exports = new UserController()
