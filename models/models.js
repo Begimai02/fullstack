@@ -31,21 +31,21 @@ const Follower = sequelize.define('follower', {
     following_user: {type: DataTypes.STRING, allowNull: false},
 })
 
-// , { onDelete: 'cascade', hooks: true }
+
 User.hasMany(Post)
-Post.belongsTo(User)
+Post.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
 User.hasMany(Comment)
-Comment.belongsTo(User)
+Comment.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
 Post.hasMany(Comment)
-Comment.belongsTo(Post)
+Comment.belongsTo(Post, { onDelete: 'cascade', hooks: true })
 
 User.hasMany(Like)
-Like.belongsTo(User)
+Like.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
 Post.hasMany(Like)
-Like.belongsTo(Post)
+Like.belongsTo(Post, { onDelete: 'cascade', hooks: true })
 
 module.exports = {
     User,
