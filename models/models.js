@@ -12,24 +12,17 @@ const User = sequelize.define('user', {
 
 const Like = sequelize.define('like', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    user_id: {type: DataTypes.STRING, allowNull: false},
-    post_id: {type: DataTypes.INTEGER, allowNull: false}
 })
 
 const Comment = sequelize.define('comment', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    user_id: {type: DataTypes.STRING, allowNull: false},
-    post_id: {type: DataTypes.INTEGER, allowNull: false},
     body: {type: DataTypes.TEXT, allowNull: false},
-    date: {type: DataTypes.INTEGER, defaultValue: DataTypes.NOW, allowNull: false}
 })
 
 const Post = sequelize.define('post', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    user_id: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.TEXT, allowNull: true},
     image: {type: DataTypes.STRING,  allowNull: false},
-    date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW, allowNull: false}
 })
 
 const Follower = sequelize.define('follower', {
@@ -38,23 +31,21 @@ const Follower = sequelize.define('follower', {
     following_user: {type: DataTypes.STRING, allowNull: false},
 })
 
+
 User.hasMany(Post)
-Post.belongsTo(User)
+Post.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
 User.hasMany(Comment)
-Comment.belongsTo(User)
+Comment.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
 Post.hasMany(Comment)
-Comment.belongsTo(Post)
+Comment.belongsTo(Post, { onDelete: 'cascade', hooks: true })
 
 User.hasMany(Like)
-Like.belongsTo(User)
+Like.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
 Post.hasMany(Like)
-Like.belongsTo(Post)
-
-User.hasMany(Follower)
-Follower.belongsTo(User)
+Like.belongsTo(Post, { onDelete: 'cascade', hooks: true })
 
 module.exports = {
     User,

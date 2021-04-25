@@ -18,7 +18,8 @@ app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 app.use('/api', router)
 
-
+// const bodyParser = require('body-parser')
+// app.use(bodyParser.json());
 
 //Обработка ошибок, послдений Middleware
 app.use(errorHandler)
