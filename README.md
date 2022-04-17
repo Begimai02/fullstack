@@ -11,10 +11,7 @@
 <br/>
 
 ## POST Запросы:
-<br/><br/>
 ### Регистрация:
-
-
 `/accounts/signup/`
 <br/>
 `{ 
@@ -22,7 +19,6 @@
     password: <password>,
 }`
 ### Login:
-
 
 `/accounts/login/`
 <br/>
@@ -48,8 +44,6 @@
 }`
 <br/>
 ### Отписаться
-
-
 `/accounts/delete_follow`
 <br/>
 `{
@@ -57,7 +51,7 @@
 }
 `
 <br/>
-### Отписаться от себя кого либо 
+### Отписать от себя кого либо 
 `/accounts/delete_follower`
 <br/>
 `{
@@ -68,7 +62,7 @@
 <br/>
 <br/>
 <br/>
-#FEED ROUTER#
+# FEED ROUTER 
 
 ## GET
 
