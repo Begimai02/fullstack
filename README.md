@@ -1,8 +1,8 @@
 # fullstack
 
-#USER_ROUTER
+# USER_ROUTER
 
-##GET Запросы:
+## GET Запросы:
 
 `/accounts/following` - Мои подписки <br/>
 `/accounts/followers` - Мои подписчики <br/>
@@ -10,9 +10,9 @@
 `/accounts/search?user_name=<user_name>` - Поиск по user_name <br/>
 <br/>
 
-##POST Запросы:
+## POST Запросы:
 <br/><br/>
-###Регистрация:
+### Регистрация:
 
 
 `/accounts/signup/`
@@ -21,7 +21,7 @@
     user_name: <user_name>,
     password: <password>,
 }`
-###Login:
+### Login:
 
 
 `/accounts/login/`
@@ -31,7 +31,7 @@
     password: <password>,
 }`
 <br/>
-###Изменить профиль
+### Изменить профиль
 `accounts/update`
 <br/>
 `{
@@ -40,14 +40,14 @@
     avatar: <jpg image>
 }
 `
-###Подписаться на кого либо
+### Подписаться на кого либо
 `/accounts/following/`
 <br/>
 `{
     follow: <user_name>
 }`
 <br/>
-###Отписаться
+### Отписаться
 
 
 `/accounts/delete_follow`
@@ -57,7 +57,7 @@
 }
 `
 <br/>
-###Отписаться от себя кого либо 
+### Отписаться от себя кого либо 
 `/accounts/delete_follower`
 <br/>
 `{
@@ -70,7 +70,7 @@
 <br/>
 #FEED ROUTER#
 
-##GET##
+## GET
 
 `/` - Лента
 <br/>
@@ -84,35 +84,22 @@
 <br/>
 `/:id/comment_delete` - Удалить коммент P.S. ТУТ ID КОММЕНТА, НЕ ПОСТА, А ИМЕННО id КОММЕНТА
 <br/>
-##POST##
+## POST
 
-###Добавить InstaPost
+### Добавить InstaPost
 `/` 
 <br/>
 `{description: <text>, image: <jpg image>}`
 
-###Изменить InstaPost
+### Изменить InstaPost
 `/:id/update/`
 <br/>
 `{description: <text>}`
 
-###Добавить коммент
+### Добавить коммент
 `/:id/comment/`
 <br/>
 `{body: <text>}`
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
